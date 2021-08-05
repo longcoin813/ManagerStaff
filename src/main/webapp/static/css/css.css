@@ -1,0 +1,29 @@
+
+
+.th, td {
+	text-align: left;
+	padding: 10px;
+}
+
+.table tr:nth-child(odd) {
+	background-color: #eee;
+}
+
+.table tr:nth-child(even) {
+	background-color: white;
+}
+
+.table tr:nth-child(1) {
+	background-color: #808080;
+}
+
+.button {
+	transition-duration: 0.4s;
+}
+
+.button:hover {
+	background-color: #4CAF50; /* Green */
+	color: white;
+}
+
+
