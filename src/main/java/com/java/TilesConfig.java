@@ -1,7 +1,9 @@
 package com.java;
 
+import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.support.ResourceBundleMessageSource;
 import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.view.UrlBasedViewResolver;
 import org.springframework.web.servlet.view.tiles3.TilesConfigurer;
@@ -22,4 +24,5 @@ public class TilesConfig {
 		configurer.setDefinitions("/WEB-INF/tiles.xml");
 		return configurer;
 	}
+
 }

@@ -14,6 +14,7 @@
 	</div>
 </div>
 <h2>User Manager</h2>
+<h4 id="message_title">${mega}</h4>
 <div class="table-responsive">
 	<%@include file="_createUser.jsp"%>
 	<table class="table table-striped table-sm">
@@ -32,7 +33,6 @@
 					<td>${user.fullName}</td>
 					<td>${user.username}</td>
 					<td>
-						<%@include file="_updateUser.jsp"%>
 						<button type="button" class="btn btn btn-success" onclick="getProfileEditUserByUserName('${user.username}')">Update</button>
 						<a href="/user/delete/${user.username}" class="btn btn-success">Delete</a>
 					</td>
@@ -40,4 +40,5 @@
 			</c:forEach>
 		</tbody>
 	</table>
+	<%@include file="_updateUser.jsp"%>
 </div>

@@ -29,6 +29,7 @@
                         </label>
                         <div class="col-sm-10">
                             <form:input path="username" class="form-control"/>
+
                         </div>
                     </div>
                     <div class="form-group row">
@@ -37,6 +38,7 @@
                         </label>
                         <div class="col-sm-10">
                             <form:input type="password" path="password" class="form-control"/>
+
                         </div>
                     </div>
                     <hr>
