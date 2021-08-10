@@ -26,7 +26,8 @@ public class Users {
     private String username;
     @NotNull
     @NotEmpty(message = "Thiếu password")
-    @Min(value = 8, message = "Password phải từ 8 kí tự trở lên")    private String password;
+    @Min(value = 8, message = "Password phải từ 8 kí tự trở lên")
+    private String password;
     @NotNull
     @NotEmpty(message = "Thiếu fullname")
     private String fullName;

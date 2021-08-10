@@ -6,7 +6,7 @@ import java.util.Collection;
 @Entity
 public class Departs {
     private String departid;
-    private String deoartname;
+    private String departname;
     private Collection<Staffs> staffsByDepartid;
 
     @Id
@@ -20,13 +20,13 @@ public class Departs {
     }
 
     @Basic
-    @Column(name = "deoartname", nullable = true, length = 50)
-    public String getDeoartname() {
-        return deoartname;
+    @Column(name = "departname", nullable = true, length = 50)
+    public String getDepartname() {
+        return departname;
     }
 
-    public void setDeoartname(String deoartname) {
-        this.deoartname = deoartname;
+    public void setDepartname(String departname) {
+        this.departname = departname;
     }
 
     @Override
@@ -37,7 +37,7 @@ public class Departs {
         Departs departs = (Departs) o;
 
         if (departid != null ? !departid.equals(departs.departid) : departs.departid != null) return false;
-        if (deoartname != null ? !deoartname.equals(departs.deoartname) : departs.deoartname != null) return false;
+        if (departname != null ? !departname.equals(departs.departname) : departs.departname != null) return false;
 
         return true;
     }
@@ -45,7 +45,7 @@ public class Departs {
     @Override
     public int hashCode() {
         int result = departid != null ? departid.hashCode() : 0;
-        result = 31 * result + (deoartname != null ? deoartname.hashCode() : 0);
+        result = 31 * result + (departname != null ? departname.hashCode() : 0);
         return result;
     }
 

@@ -35,8 +35,6 @@ public class UsersController {
             if(dao.existsById(user.getUsername())) {
                 model.addAttribute("mega", "user đã tồn tại!");
             }else {
-
-
                 dao.save(user);
                 model.addAttribute("mega", "Thêm thành công");
             }
@@ -46,6 +44,7 @@ public class UsersController {
             model.addAttribute("form", user);
             model.addAttribute("mega", "Thêm thất bại");
         }
+        model.addAttribute("users", dao.findAll());
         return "user/userList";
     }
 
@@ -58,6 +57,7 @@ public class UsersController {
             dao.deleteById(username);
             model.addAttribute("mega", "Xóa thành công!");
         }
+        model.addAttribute("users", dao.findAll());
         return "user/userList";
 
     }

@@ -4,7 +4,7 @@
 
 <div
 	class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-	<h1 class="h2">User</h1>
+	<h2>User Manager</h2>
 	<div class="btn-toolbar mb-2 mb-md-0">
 		<div class="btn-group me-2">
 			<button type="button" class="btn btn-sm btn-outline-secondary">Share</button>
@@ -13,7 +13,6 @@
 
 	</div>
 </div>
-<h2>User Manager</h2>
 <h4 id="message_title">${mega}</h4>
 <div class="table-responsive">
 	<%@include file="_createUser.jsp"%>
@@ -33,7 +32,7 @@
 					<td>${user.fullName}</td>
 					<td>${user.username}</td>
 					<td>
-						<button type="button" class="btn btn btn-success" onclick="getProfileEditUserByUserName('${user.username}')">Update</button>
+						<button type="button" class="btn btn btn-danger" onclick="getProfileEditUserByUserName('${user.username}')">Update</button>
 						<a href="/user/delete/${user.username}" class="btn btn-success">Delete</a>
 					</td>
 				</tr>

@@ -1,21 +1,37 @@
 package com.java.entity;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.sql.Date;
 import java.util.Collection;
 
 @Entity
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class Staffs {
+    @NotNull
     private String staffid;
+    @NotNull
     private String staffname;
+    @NotNull
     private Boolean gender;
+    @NotNull
     private Date birthday;
-    private String photo;
+    @NotNull
     private String email;
+    @NotNull
     private String phone;
+    @NotNull
     private Double salary;
     private String notes;
     private Collection<Records> recordsByStaffid;
+    @NotNull
     private Departs departsByDepartid;
 
     @Id
@@ -58,15 +74,6 @@ public class Staffs {
         this.birthday = birthday;
     }
 
-    @Basic
-    @Column(name = "photo", nullable = true, length = 50)
-    public String getPhoto() {
-        return photo;
-    }
-
-    public void setPhoto(String photo) {
-        this.photo = photo;
-    }
 
     @Basic
     @Column(name = "email", nullable = true, length = 50)
@@ -119,7 +126,6 @@ public class Staffs {
         if (staffname != null ? !staffname.equals(staffs.staffname) : staffs.staffname != null) return false;
         if (gender != null ? !gender.equals(staffs.gender) : staffs.gender != null) return false;
         if (birthday != null ? !birthday.equals(staffs.birthday) : staffs.birthday != null) return false;
-        if (photo != null ? !photo.equals(staffs.photo) : staffs.photo != null) return false;
         if (email != null ? !email.equals(staffs.email) : staffs.email != null) return false;
         if (phone != null ? !phone.equals(staffs.phone) : staffs.phone != null) return false;
         if (salary != null ? !salary.equals(staffs.salary) : staffs.salary != null) return false;
@@ -134,7 +140,6 @@ public class Staffs {
         result = 31 * result + (staffname != null ? staffname.hashCode() : 0);
         result = 31 * result + (gender != null ? gender.hashCode() : 0);
         result = 31 * result + (birthday != null ? birthday.hashCode() : 0);
-        result = 31 * result + (photo != null ? photo.hashCode() : 0);
         result = 31 * result + (email != null ? email.hashCode() : 0);
         result = 31 * result + (phone != null ? phone.hashCode() : 0);
         result = 31 * result + (salary != null ? salary.hashCode() : 0);
