@@ -19,32 +19,50 @@ function setResponseToModalEdit(data) {
 
 // staff
 function getProfileEditStaffUById(staffid) {
-    $.get(`/staff/edit/${staffid}`, (response) => {
-        if (response) {
-            setResponseModalStaffEdit(response)
+    $.get(`/user//staff/edit/${staffid}`, (staff) => {
+        if (staff) {
+            setResponseModalStaffEdit(staff)
         }
     })
 }
 
-function setResponseModalStaffEdit(data1) {
-    const {staffid, staffname} = data1;
+function setResponseModalStaffEdit(payload) {
 
-    $('#editstaffid').val(staffid);
-    $('#editstaffname').val(staffname);
+    $('#editstaffid').val(payload['staffid']);
+    $('#editstaffname').val(payload['staffname']);
+    if (payload['gender']) {
+        $('#genderMale').prop('checked', 'checked')
+    } else {
+        $('#genderFemale').prop('checked', 'checked')
+    }
+
+    document.getElementById('editbirthday').valueAsDate = new Date(payload['birthday']);
+
+    $('#editemail').val(payload['email']);
+    $('#editphone').val(payload['phone']);
+    $('#editsalary').val(payload['salary']);
+    $('#editnotes').val(payload['notes']);
+    $('#editdepartid').val(payload['departid']);
+
+    $('#updateModalStaff').modal('show');
+
+}
 
 // Depart
-    function getdepartid(departid) {
-        $.get(`/depart/edit/${departid}`, (response) => {
-            if (response) {
-                setResponseModalStaffEdit(response)
-            }
-        })
-    }
+function getdepartid(departid) {
+    $.get(`/user/departs/edit/${departid}`, (depart) => {
+        if (depart) {
+            setResponseModalDepartEdit(depart)
+        }
+    })
+}
 
-    function setResponseModalDepartEdit(data) {
-        const {departid, departname} = data;
+function setResponseModalDepartEdit(data1) {
+    const {departid, departname} = data1;
 
-        $('#editID').val(departid);
-        $('#editName').val(departname);
-    }
+    $('#editID').val(departid);
+    $('#editName').val(departname);
+
+    $('#updateModalDepart').modal('show');
+
 }

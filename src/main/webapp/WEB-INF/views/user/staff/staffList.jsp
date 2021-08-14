@@ -55,5 +55,5 @@
         </c:forEach>
         </tbody>
     </table>
-    	<%@include file="_updateStaff.jsp"%>
+    <%@include file="_updateStaff.jsp"%>
 </div>

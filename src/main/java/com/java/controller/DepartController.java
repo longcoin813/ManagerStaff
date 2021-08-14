@@ -2,8 +2,6 @@ package com.java.controller;
 
 import com.java.dao.DepartDao;
 import com.java.entity.Departs;
-import com.java.entity.Staffs;
-import com.java.entity.Users;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
@@ -23,16 +21,17 @@ public class DepartController {
     DepartDao dao;
 
     @GetMapping("/user/departs")
-    public String departList(Model model){
-        model.addAttribute("form",new Departs());
+    public String departList(Model model) {
+        model.addAttribute("form", new Departs());
         return "departs/departsList";
     }
+
     @RequestMapping("departs/create")
     public String userSave(ModelMap model, @Valid @ModelAttribute("form") Departs depart, BindingResult bindingResult) {
         if (!bindingResult.hasErrors()) {
-            if(dao.existsById(depart.getDepartid())) {
+            if (dao.existsById(depart.getDepartid())) {
                 model.addAttribute("mega", " ID đã tồn tại!");
-            }else {
+            } else {
                 dao.save(depart);
                 model.addAttribute("mega", "Thêm thành công");
             }
@@ -46,32 +45,48 @@ public class DepartController {
 
     @GetMapping("departs/delete/{departid}")
     public String delete(Model model, @PathVariable(name = "departid") String departid) {
-        Optional<Departs> option = dao.findById(departid);
-        if(!dao.existsById(departid)) {
-            model.addAttribute("mega", "ID không tồn tại!");
-        } else {
-            dao.deleteById(departid);
-            model.addAttribute("mega", "Xóa thành công!");
+        try {
+            Optional<Departs> option = dao.findById(departid);
+            if (!dao.existsById(departid)) {
+                model.addAttribute("mega", "ID không tồn tại!");
+            } else {
+                dao.deleteById(departid);
+                model.addAttribute("mega", "Xóa thành công!");
+            }
+        }
+        catch (Exception e){
+            model.addAttribute("mega", "ID này đang được sử dụng");
         }
         model.addAttribute("departs", dao.findAll());
         return "departs/departsList";
     }
 
 
-    @GetMapping(value = "departs/edit/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = "/user/departs/edit/{departid}", produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-    public Departs edit(Model model, @PathVariable("id") String departid) {
-        Optional<Departs> departsOptional = dao.findById(departid);
+    public Departs edit(Model model, @PathVariable("departid") String departid) {
+        Optional<Departs> departsOptional =null;
+        try {
+            departsOptional = dao.findById(departid);
+//            return departsOptional.orElse(null);
+        }catch (Exception e){
+            model.addAttribute("mega", "ID đang được sử dụng!");
+        }
         return departsOptional.orElse(null);
+
     }
 
     @PostMapping("departs/update")
-    public String updateDepartProfile(Model model, @ModelAttribute("editID") Departs departs) {
-        if(!dao.existsById(departs.getDepartid())) {
-            model.addAttribute("mega", "ID không tồn tại!");
-        }else {
-            dao.save(departs);
-            model.addAttribute("mega", "Cập nhật thành công!");
+    public String updateDepartProfile(Model model, @ModelAttribute("editDepart") Departs departs) {
+        try {
+            if (!dao.existsById(departs.getDepartid())) {
+                model.addAttribute("mega", "ID không tồn tại!");
+            } else {
+                dao.save(departs);
+                model.addAttribute("mega", "Cập nhật thành công!");
+            }
+        } catch (Exception e) {
+            model.addAttribute("mega", "ID đang được sử dụng!");
         }
         model.addAttribute("departs", dao.findAll());
         return "departs/departsList";
@@ -87,7 +102,8 @@ public class DepartController {
     public Departs initDepart() {
         return new Departs();
     }
-    @ModelAttribute(name = "editID")
+
+    @ModelAttribute(name = "editDepart")
     public Departs initEditDeparts() {
         return new Departs();
     }

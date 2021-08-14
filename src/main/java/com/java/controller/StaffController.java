@@ -1,6 +1,7 @@
 package com.java.controller;
 
 import com.java.dao.StaffDao;
+import com.java.entity.Records;
 import com.java.entity.Staffs;
 import com.java.entity.Users;
 import lombok.RequiredArgsConstructor;
@@ -48,19 +49,24 @@ public class StaffController {
 
     @GetMapping("staff/delete/{staffid}")
     public String delete(Model model, @PathVariable(name = "staffid") String staffid) {
-        Optional<Staffs> option = dao.findById(staffid);
-        if(!dao.existsById(staffid)) {
-            model.addAttribute("mega", "Nhân viên không tồn tại!");
-        } else {
-            dao.deleteById(staffid);
-            model.addAttribute("mega", "Xóa thành công!");
+        try {
+            Optional<Staffs> option = dao.findById(staffid);
+            if (!dao.existsById(staffid)) {
+                model.addAttribute("mega", "Nhân viên không tồn tại!");
+            } else {
+                dao.deleteById(staffid);
+                model.addAttribute("mega", "Xóa thành công!");
+            }
         }
-        model.addAttribute("staff", dao.findAll());
+        catch (Exception e){
+            model.addAttribute("mega", "Xóa không thành công");
+        }
+        model.addAttribute("    staff", dao.findAll());
         return "staff/staffList";
 
     }
 
-    @GetMapping(value = "staff/edit/{staffid}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = "/user/staff/edit/{staffid}", produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     public Staffs edit(Model model, @PathVariable("staffid") String staffId) {
         Optional<Staffs> staffOptional = dao.findById(staffId);
@@ -78,6 +84,7 @@ public class StaffController {
         model.addAttribute("staff", dao.findAll());
         return "staff/staffList";
     }
+
 
 
 

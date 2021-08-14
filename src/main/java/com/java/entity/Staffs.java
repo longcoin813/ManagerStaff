@@ -1,5 +1,6 @@
 package com.java.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -30,8 +31,10 @@ public class Staffs {
     @NotNull
     private Double salary;
     private String notes;
+    @JsonIgnore
     private Collection<Records> recordsByStaffid;
     @NotNull
+    @JsonIgnore
     private Departs departsByDepartid;
 
     @Id
@@ -146,7 +149,7 @@ public class Staffs {
         result = 31 * result + (notes != null ? notes.hashCode() : 0);
         return result;
     }
-
+    @JsonIgnore
     @OneToMany(mappedBy = "staffsByStaffid")
     public Collection<Records> getRecordsByStaffid() {
         return recordsByStaffid;
@@ -156,6 +159,7 @@ public class Staffs {
         this.recordsByStaffid = recordsByStaffid;
     }
 
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "departid", referencedColumnName = "departid")
     public Departs getDepartsByDepartid() {

@@ -37,7 +37,7 @@
 
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary"
-                                data-dismiss="modal">Close
+                                data-dismiss="modal" >Close
                         </button>
                         <button class="btn btn-success" formaction="/departs/create">Save
                             changes

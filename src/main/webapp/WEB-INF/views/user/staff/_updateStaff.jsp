@@ -1,5 +1,5 @@
 <!-- Modal -->
-<div class="modal fade" id="updateModal" tabindex="-1" role="dialog"
+<div class="modal fade" id="updateModalStaff" tabindex="-1" role="dialog"
      aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -11,7 +11,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form:form action="/user/staff/update" modelAttribute="editStaff" method="post">
+                <form:form action="/staff/update" modelAttribute="editStaff" method="post">
                     <div class="form-group row">
                         <label class="col-sm-2 col-form-label">
                             ID
@@ -26,7 +26,6 @@
                         </label>
                         <div class="col-sm-10">
                             <form:input id="editstaffname" path="staffname" class="form-control"/>
-
                         </div>
                     </div>
                     <div class="form-group row">
@@ -35,18 +34,18 @@
                         </label>
                         <div class="col-sm-10">
                             <div class="form-check-inline">
-                                <label class="form-check-label" for="radio2">
-                                    <form:radiobutton id="editgender" path="gender" class="form-check-input" value="true"/>
+                                <label class="form-check-label" for="radio1">
+                                    <form:radiobutton id="genderMale" path="gender" class="form-check-input"
+                                                      value="true"/>
                                     Male
                                 </label>
                             </div>
                             <div class="form-check-inline">
                                 <label class="form-check-label" for="radio2">
-                                        <form:radiobutton id="editgender" path="gender" class="form-check-input"
+                                        <form:radiobutton id="genderFemale" path="gender" class="form-check-input"
                                                           value="false"/>
                                     Female
                             </div>
-
                         </div>
                     </div>
                     <div class="form-group row">
@@ -54,7 +53,8 @@
                             Birthday
                         </label>
                         <div class="col-sm-10">
-                            <form:input id="editbirthday" path="birthday" class="form-control" placeholder="YYYY/MM/DD"/>
+                            <form:input type="date" id="editbirthday" path="birthday" class="form-control"
+                                        placeholder="YYYY/MM/DD"/>
 
                         </div>
                     </div>
@@ -99,8 +99,12 @@
                             Depart
                         </label>
                         <div class="col-sm-10">
-                            <form:input id="editdepartid" path="departsByDepartid" class="form-control"/>
-
+<%--                            <form:input id="editdepartid" path="departsByDepartid" class="form-control"/>--%>
+                            <form:select path="departsByDepartid"  id="editdepartid" class="form-control">
+                                <form:options items="${staffs}"
+                                              itemValue="departsByDepartid"
+                                              itemLabel="departsByDepartid.departname" />
+                            </form:select>
                         </div>
                     </div>
                     <hr>
@@ -109,7 +113,7 @@
                         <button type="button" class="btn btn-secondary"
                                 data-dismiss="modal">Close
                         </button>
-                        <button class="btn btn-success" formaction="/staff/update">Update
+                        <button class="btn btn-success"  name="updateStaff"formaction="/staff/update">Update
                         </button>
                     </div>
                 </form:form>

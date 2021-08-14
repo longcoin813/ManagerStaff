@@ -75,7 +75,7 @@ public class Records {
         return result;
     }
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "staffid", referencedColumnName = "staffid")
     public Staffs getStaffsByStaffid() {
         return staffsByStaffid;

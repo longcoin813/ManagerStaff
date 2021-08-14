@@ -1,12 +1,18 @@
 package com.java.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.sun.istack.NotNull;
+
 import javax.persistence.*;
 import java.util.Collection;
 
 @Entity
 public class Departs {
-    private String departid;
-    private String departname;
+    @NotNull
+        private String departid;
+    @NotNull
+        private String departname;
+    @JsonIgnore
     private Collection<Staffs> staffsByDepartid;
 
     @Id
@@ -41,14 +47,14 @@ public class Departs {
 
         return true;
     }
-
+    @JsonIgnore
     @Override
     public int hashCode() {
         int result = departid != null ? departid.hashCode() : 0;
         result = 31 * result + (departname != null ? departname.hashCode() : 0);
         return result;
     }
-
+    @JsonIgnore
     @OneToMany(mappedBy = "departsByDepartid")
     public Collection<Staffs> getStaffsByDepartid() {
         return staffsByDepartid;
